@@ -30,7 +30,7 @@ if (isset($_SESSION['auth_user'])) {
         ?>
         <div class="container-lg">
             <div class="row py-5">
-                <div class="col-6">
+                <div class="col-md-6">
                     <div class="card shadow-lg">
                         <div class="card-body">
                             <h2 class="mb-4">Εγγραφή</h2>
@@ -40,7 +40,7 @@ if (isset($_SESSION['auth_user'])) {
 
                 </div>
 
-                <div class="col-6">
+                <div class="col-md-6">
                     <?php include 'login.php' ?>
                 </div>
             </div>

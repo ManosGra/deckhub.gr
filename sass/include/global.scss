@@ -152,11 +152,21 @@ button:focus {
 }
 
 #login-register {
-    padding-top: 180px;
+    padding-top: 150px;
 
     .login-header {
         max-width: 400px;
         margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    #login-register {
+        padding-top: 50px;
+
+        .col-md-6{
+            margin-bottom: 20px;
+        }
     }
 }
 
@@ -333,7 +343,7 @@ button:focus {
     transform: translateY(0);
 }
 
-.main-site{
+.main-site {
     padding: 90px 0;
 }
 
@@ -342,59 +352,64 @@ button:focus {
         padding: 0;
     }
 
-    .orders-table{
+    .orders-table {
         font-size: 12px;
     }
 
-    .orders-table a{
+    .orders-table a {
         font-size: 12px;
         padding: 4px;
         margin: 2px;
     }
 
-    .card, h2{
+    .card,
+    h2 {
         font-size: 12px;
     }
 
-    #cart{
+    #cart {
         padding: 90px 0 25px 0;
-        table{
+
+        table {
             font-size: 12px;
         }
-        table button{
+
+        table button {
             font-size: 12px;
             display: flex;
         }
-        table .increment-btn .decrement-btn .input-qty{
-            width: 50px!important;
+
+        table .increment-btn .decrement-btn .input-qty {
+            width: 50px !important;
             font-size: 16px;
         }
+
         table .input-group {
-            width: 32px!important;
+            width: 32px !important;
         }
 
         .red {
-            color: red !important; /* Αλλάζει το χρώμα σε κόκκινο */
+            color: red !important;
+            /* Αλλάζει το χρώμα σε κόκκινο */
         }
     }
-    
 
-    #checkout{
+
+    #checkout {
         padding: 90px 0;
         font-size: 12px;
 
-        input{
+        input {
             font-size: 12px;
         }
 
-        h5{
-            margin: 20px 0!important;
+        h5 {
+            margin: 20px 0 !important;
             text-align: center;
         }
 
-        a{
-            margin: 0!important;
+        a {
+            margin: 0 !important;
         }
     }
 }
-

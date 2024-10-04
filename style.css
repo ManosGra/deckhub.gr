@@ -138,13 +138,21 @@ button:focus {
 }
 
 #login-register {
-  padding-top: 180px;
+  padding-top: 150px;
 }
 #login-register .login-header {
   max-width: 400px;
   margin: 0 auto;
 }
 
+@media only screen and (max-width: 420px) {
+  #login-register {
+    padding-top: 50px;
+  }
+  #login-register .col-md-6 {
+    margin-bottom: 20px;
+  }
+}
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -313,7 +321,8 @@ button:focus {
     padding: 4px;
     margin: 2px;
   }
-  .card, h2 {
+  .card,
+  h2 {
     font-size: 12px;
   }
   #cart {
@@ -334,7 +343,8 @@ button:focus {
     width: 32px !important;
   }
   #cart .red {
-    color: red !important; /* Αλλάζει το χρώμα σε κόκκινο */
+    color: red !important;
+    /* Αλλάζει το χρώμα σε κόκκινο */
   }
   #checkout {
     padding: 90px 0;
