@@ -3,7 +3,7 @@
     <div class="row align-items-center justify-content-between py-4">
 
       <div class="col-2 col-md-auto">
-        <a class="navbar-brand text-white font-rubik" href="http://eshop.local/">Eshop</a>
+        <a class="navbar-brand text-white font-rubik" href="http://deckhub.local/">Eshop</a>
       </div>
 
       <div class="col-8 col-md-9">
