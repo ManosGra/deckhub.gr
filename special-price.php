@@ -41,7 +41,7 @@ if (mysqli_num_rows($result) > 0) {
                                    
                                 </div>
 
-                                <img class="img-fluid"  src="uploads/<?php echo $product['item_image']; ?>" alt="<?php echo $product['name']; ?>">
+                                <img class="img-fluid"  src="uploads/<?php echo $product['item_image']; ?>" alt="<?php echo $product['name']; ?>" style="width:220px; height:220px;">
                             </a>
 
                             <div class="text-center my-3">
@@ -49,7 +49,7 @@ if (mysqli_num_rows($result) > 0) {
                                 <p class="m-0 font-size-16 text-danger  fw-bold"><del><?php echo $product['original_price']; ?>€</del></p>
                                 <p class="m-0 font-size-20  fw-bold"><?php echo $product['selling_price']; ?>€</p>
                             </div>
-                            <button class="btn btn-danger fw-bold addToCartBtn"
+                            <button class="btn btn-danger fw-bold font-size-14 addToCartBtn"
                                     value="<?php echo $product['id']; ?>">
                                     <input type="hidden" class="form-control text-center input-qty bg-white" value="1" disabled>
                                     <i

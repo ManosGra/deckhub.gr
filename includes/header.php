@@ -1,4 +1,6 @@
+<?php ob_start() ?>
 <?php include 'config/db.php' ?>
+
 <!doctype html>
 <html lang="en">
 

@@ -177,7 +177,7 @@ button:focus {
 }
 
 #search {
-  padding: 300px 0;
+  padding: 120px 0;
 }
 
 #footer {
@@ -498,37 +498,70 @@ html {
   background-color: lightgrey;
 }
 
+/* Στυλ για το κουμπί αναζήτησης */
+#openSearch {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Στυλ για το popup */
+.popup {
+  display: none;
+  /* Το αρχικό display είναι "none" για να μην φαίνεται */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Σκούρο φόντο για να ξεχωρίζει το popup */
+}
+
+.popup-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 50%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Στυλ για το κουμπί κλεισίματος */
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Στυλ για το search container */
 .search-container {
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
 }
 
 .search-input {
-  width: 500px;
-  height: 40px;
+  width: 100%;
   padding: 10px;
-  border: 0px solid gray;
-  border-radius: 20px 0 0 20px;
-  outline: none;
   font-size: 16px;
-  background-color: white;
-}
-
-.search-input:focus {
-  border-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .search-button {
-  background-color: white;
+  background-color: transparent !important;
   border: 2px solid transparent;
   border-radius: 0 20px 20px 0;
-  padding: 10px 15px;
   cursor: pointer;
-  font-size: 20px;
   outline: none;
   display: flex;
   align-items: center;
   height: 40px;
+  color: white;
 }
 
 .profile:hover {
@@ -552,10 +585,12 @@ html {
 
 @media only screen and (max-width: 991px) {
   .navigation {
-    display: none; /* Κρύβει το κανονικό μενού */
+    display: none;
+    /* Κρύβει το κανονικό μενού */
   }
   .responsive-nav {
-    display: block !important; /* Εμφανίζει το responsive nav */
+    display: block !important;
+    /* Εμφανίζει το responsive nav */
     background-color: #283c6a;
     border-bottom: 2px solid #ebb06c;
     width: 100%;
@@ -569,32 +604,42 @@ html {
     left: 0;
     width: 100%;
     background-color: #000000;
-    opacity: 0; /* Αρχικά κρυφό */
-    visibility: hidden; /* Κρύβει το menu */
-    transform: translateY(-10px); /* Ελαφριά μετατόπιση προς τα πάνω */
-    transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease; /* Ομαλή μετάβαση */
+    opacity: 0;
+    /* Αρχικά κρυφό */
+    visibility: hidden;
+    /* Κρύβει το menu */
+    transform: translateY(-10px);
+    /* Ελαφριά μετατόπιση προς τα πάνω */
+    transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease;
+    /* Ομαλή μετάβαση */
     z-index: 998;
   }
   .nav-menu li {
     margin: 20px 10px;
   }
   .nav-menu.active {
-    opacity: 1; /* Εμφάνιση του μενού */
-    visibility: visible; /* Ορατό */
-    transform: translateY(0); /* Επαναφορά στη θέση του */
-    transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease; /* Άμεση μετάβαση */
+    opacity: 1;
+    /* Εμφάνιση του μενού */
+    visibility: visible;
+    /* Ορατό */
+    transform: translateY(0);
+    /* Επαναφορά στη θέση του */
+    transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease;
+    /* Άμεση μετάβαση */
     height: 100vh;
     color: white;
     border-top: 2px solid #ebb06c;
   }
   .hamburger {
-    display: block; /* Εμφανίζει το hamburger */
+    display: block;
+    /* Εμφανίζει το hamburger */
   }
   .hamburger.active .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }
   .hamburger.active .bar:nth-child(2) {
-    opacity: 0; /* Εξαφανίζει τη μεσαία γραμμή */
+    opacity: 0;
+    /* Εξαφανίζει τη μεσαία γραμμή */
     transform: translateX(-20px);
   }
   .hamburger.active .bar:nth-child(3) {
@@ -727,7 +772,7 @@ html {
   color: white;
 }
 
-#products, #search {
+#products {
   padding: 180px 0;
 }
 

@@ -275,10 +275,34 @@ $(document).ready(function () {
         navMenu.classList.toggle("active");
     });
 
-    document.querySelectorAll(".nav-link").forEach(n => 
+    document.querySelectorAll(".nav-link").forEach(n =>
         n.addEventListener("click", () => {
             hamburger.classList.remove("active");
             navMenu.classList.remove("active");
         })
     );
+
+
+});
+
+// Βρίσκουμε τα στοιχεία από το DOM
+const searchPopup = document.getElementById('searchPopup');
+const openSearch = document.getElementById('openSearch');
+const closePopup = document.getElementById('closePopup');
+
+// Άνοιγμα του popup όταν γίνει κλικ στο κουμπί
+openSearch.addEventListener('click', function() {
+    searchPopup.style.display = 'block';
+});
+
+// Κλείσιμο του popup όταν γίνει κλικ στο κουμπί "κλείσιμο"
+closePopup.addEventListener('click', function() {
+    searchPopup.style.display = 'none';
+});
+
+// Κλείσιμο του popup όταν γίνει κλικ έξω από το popup
+window.addEventListener('click', function(event) {
+    if (event.target === searchPopup) {
+        searchPopup.style.display = 'none';
+    }
 });

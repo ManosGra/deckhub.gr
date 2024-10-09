@@ -32,13 +32,13 @@ if (mysqli_num_rows($result) > 0) {
                     <div class="item py-2 product_data">
                         <div class="product font-rale d-flex flex-column align-items-center">
                             <a href="product-view.php?product=<?php echo $product['slug'] ?>"><img src="uploads/<?php echo $product['item_image']; ?>"
-                                    alt="<?php echo $product['name']; ?>" 
+                                    alt="<?php echo $product['name']; ?>" style="width:220px; height:220px;" 
                                     ></a>
                             <div class="text-center my-3">
                                 <h6><?php echo $product['name']; ?></h6>
                                 <p class="m-0 font-size-20  fw-bold"><?php echo $product['selling_price']; ?>€</p>
                             </div>
-                            <button class="btn btn-danger fw-bold addToCartBtn"
+                            <button class="btn btn-danger fw-bold font-size-14 addToCartBtn"
                                     value="<?php echo $product['id']; ?>">
                                     <input type="hidden" class="form-control text-center input-qty bg-white" value="1" disabled>
                                     <i

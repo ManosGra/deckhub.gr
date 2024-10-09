@@ -31,7 +31,7 @@ include 'includes/navigation.php';
                                 if (in_array($item['category_id'], $category_ids) || empty($category_ids)) {
                                     ?>
                                     <div class="col-md-4 mb-3">
-                                        <div class="card shadow-lg product-box product_data pt-3">
+                                        <div class="card shadow-lg product-box product_data box show pt-3">
                                             <div class="card-body p-0">
                                                 <div class="product-image">
                                                     <a class="text-decoration-none" href="product-view.php?product=<?php echo $item['slug'] ?>">
@@ -51,9 +51,6 @@ include 'includes/navigation.php';
                                                     <a href="product-view.php?product=<?php echo $item['slug'] ?>" class="text-decoration-none product-btn w-100 text-center p-2">
                                                         <i class="bi bi-search text-white font-size-20"></i>
                                                     </a>
-                                                    <button class="product-btn w-100 text-center p-2">
-                                                        <i class="bi bi-heart text-white font-size-20"></i>
-                                                    </button>
                                                     <button class="product-btn addToCartBtn w-100 text-center p-2" value="<?php echo $item['id']; ?>">
                                                         <input type="hidden" class="form-control text-center input-qty bg-white" value="1" disabled>
                                                         <i class="bi bi-cart text-white font-size-20"></i>
