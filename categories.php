@@ -19,7 +19,7 @@
                                 <a class="text-decoration-none" href="products.php?category=<?php echo $item['slug']; ?>">
                                     <div class="meta-title-description">
                                         <img src="uploads/<?php echo $item['category_image']; ?>" alt="Category Image"
-                                            class="rounded-4 w-100 box-shadow img-fluid category-bg" style="height:400px">
+                                            class="rounded-4 w-100 box-shadow img-fluid category-bg" style="height:356px">
                                         <h4 class="meta-title-hashtag font-size-25 fw-bold"><?php echo $item['meta_title']; ?></h4>
                                     </div>
                                 </a>
