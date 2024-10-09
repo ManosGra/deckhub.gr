@@ -1,4 +1,4 @@
-<?php ob_start(); 
+<?php ob_start();
 session_start(); // Ξεκινάμε τη συνεδρία
 
 // Έλεγχος αν ο χρήστης δεν είναι συνδεδεμένος
@@ -15,8 +15,7 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
 
 <section id="checkout">
     <div class="container-lg">
-        <a href="cart.php" class="text-decoration-none btn btn-warning mb-5"><i
-                class="fa fa-reply me-2"></i>Back</a>
+        <a href="cart.php" class="text-decoration-none btn btn-warning mb-5"><i class="fa fa-reply me-2"></i>Back</a>
         <form action="functions/placeorder.php" method="POST">
             <div class="row">
                 <div class="col-md-7">
@@ -33,8 +32,9 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
 
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold ">Επώνυμο</label>
-                                    <input type="text" name="lastname" class="form-control form-control-lg border-primary"
-                                        placeholder="Επώνυμο" required>
+                                    <input type="text" name="lastname"
+                                        class="form-control form-control-lg border-primary" placeholder="Επώνυμο"
+                                        required>
                                 </div>
 
                                 <div class="col-md-12">
@@ -46,8 +46,8 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
                                 <div class="col-md-12">
                                     <label class="form-label mt-3 fw-bold">Διεύθυνση</label>
                                     <input type="text" name="address"
-                                        class="form-control form-control-lg border-primary"
-                                        placeholder="Διεύθυνση" required></input>
+                                        class="form-control form-control-lg border-primary" placeholder="Διεύθυνση"
+                                        required></input>
                                 </div>
 
                                 <div class="col-md-6">
@@ -91,7 +91,8 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
                                     $totalPrice += $citem['selling_price'] * $citem['prod_qty']; ?>
                                     <tr class="product_data align-items-center">
                                         <td class="align-middle text-center">
-                                            <img data-src="uploads/<?php echo $citem['item_image']; ?>" class="lazy" alt="Image" width="100px">
+                                            <img data-src="uploads/<?php echo $citem['item_image']; ?>" class="lazy" alt="Image"
+                                                width="100px">
                                         </td>
                                         <td class="align-middle text-center"><?php echo $citem['name']; ?></td>
                                         <td class="align-middle text-center">x<?php echo $citem['prod_qty']; ?></td>
@@ -110,6 +111,7 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
 
                         <button type="submit" name="placeOrderBtn" class="btn btn-primary w-100">Confirm and place order
                             | COD</button>
+                            <div id="paypal-button-container"></div>
                     </div>
                 </div>
             </div>
@@ -118,3 +120,7 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
 </section>
 
 <?php include 'includes/footer.php'; ?>
+
+<script
+    src="https://www.paypal.com/sdk/js?client-id=AfKKVavIPXWqOTrE1le96PxC-lvpYIdWHZMfP9Vz8nZfHacg8uCboZteyXkrNMIZfwjfxKZpvGTDDVhD&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo"
+    data-sdk-integration-source="developer-studio"></script>
