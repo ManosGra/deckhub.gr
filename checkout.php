@@ -12,6 +12,13 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/navigation.php'; ?>
 <?php include 'authenticate.php'; ?>
+<?php
+$cartItems = getCartItems();
+
+if (mysqli_num_rows($cartItems) == 0) {
+    header('Location: index.php');
+}
+?>
 
 <section id="checkout">
     <div class="container-lg">
@@ -26,41 +33,50 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
                             <div class="row">
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold">Ονομα</label>
-                                    <input type="text" name="name" class="form-control form-control-lg border-primary"
-                                        placeholder="Όνομα" required>
+                                    <input type="text" name="name" id="name"
+                                        class="form-control form-control-lg border-primary" placeholder="Όνομα"
+                                        required>
+                                    <small class="text-danger name"></small>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold ">Επώνυμο</label>
-                                    <input type="text" name="lastname"
+                                    <input type="text" name="lastname" id="lastname"
                                         class="form-control form-control-lg border-primary" placeholder="Επώνυμο"
                                         required>
+                                    <small class="text-danger lastname"></small>
                                 </div>
 
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold  mt-3">Email</label>
-                                    <input type="email" name="email" class="form-control form-control-lg border-primary"
+                                    <input type="email" name="email" id="email"
+                                        class="form-control form-control-lg border-primary"
                                         placeholder="example@email.com" required>
+                                    <small class="text-danger email"></small>
                                 </div>
 
                                 <div class="col-md-12">
                                     <label class="form-label mt-3 fw-bold">Διεύθυνση</label>
-                                    <input type="text" name="address"
+                                    <input type="text" name="address" id="address"
                                         class="form-control form-control-lg border-primary" placeholder="Διεύθυνση"
                                         required></input>
+                                    <small class="text-danger address"></small>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label mt-3 fw-bold">Τηλέφωνο</label>
-                                    <input type="tel" name="phone" class="form-control form-control-lg border-primary"
-                                        placeholder="Τηλέφωνο" required>
+                                    <input type="tel" name="phone" id="phone"
+                                        class="form-control form-control-lg border-primary" placeholder="Τηλέφωνο"
+                                        required>
+                                    <small class="text-danger phone"></small>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label mt-3 fw-bold">Ταχυδρομικός Κωδικός</label>
-                                    <input type="text" name="pincode"
+                                    <input type="text" name="pincode" id="pincode"
                                         class="form-control form-control-lg border-primary"
                                         placeholder="Ταχυδρομικός Κωδικός" required>
+                                    <small class="text-danger pincode"></small>
                                 </div>
 
                                 <div class="col-md-6">
@@ -111,8 +127,8 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
 
                         <button type="submit" name="placeOrderBtn" class="btn btn-primary w-100">Confirm and place order
                             | COD</button>
-                            <div id="paypal-button-container"></div>
-                            <p id="result-message"></p>
+
+                        <div id="paypal-button-container" class="mt-3"></div>
                     </div>
                 </div>
             </div>
@@ -123,115 +139,108 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
 <?php include 'includes/footer.php'; ?>
 
 <script
-    src="https://www.paypal.com/sdk/js?client-id=AfKKVavIPXWqOTrE1le96PxC-lvpYIdWHZMfP9Vz8nZfHacg8uCboZteyXkrNMIZfwjfxKZpvGTDDVhD&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo"
-    data-sdk-integration-source="developer-studio"></script>
+    src="https://www.paypal.com/sdk/js?client-id=AfKKVavIPXWqOTrE1le96PxC-lvpYIdWHZMfP9Vz8nZfHacg8uCboZteyXkrNMIZfwjfxKZpvGTDDVhD&currency=EUR"></script>
 
 <script>
-    window.paypal
-        .Buttons({
-            style: {
-                shape: "rect",
-                layout: "vertical",
-                color: "gold",
-                label: "paypal",
-            },
-            message: {
-                amount: <?php echo $totalPrice; ?>,
-            },
 
-            async createOrder() {
-                try {
-                    const response = await fetch("/api/orders", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        // use the "body" param to optionally pass additional order information
-                        // like product ids and quantities
-                        body: JSON.stringify({
-                            cart: [
-                                {
-                                    id: "YOUR_PRODUCT_ID",
-                                    quantity: "YOUR_PRODUCT_QUANTITY",
-                                },
-                            ],
-                        }),
-                    });
+    paypal.Buttons({
+        onClick() {
+            var name = $('#name').val();
+            var lastname = $('#lastname').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+            var pincode = $('#pincode').val();
+            var address = $('#address').val();
 
-                    const orderData = await response.json();
+            if (name.length == 0) {
+                $('.name').text("*This field is required");
+            } else {
+                $('.name').text("");
+            }
+            if (lastname.length == 0) {
+                $('.lastname').text("*This field is required");
+            } else {
+                $('.lastname').text("");
+            }
+            if (email.length == 0) {
+                $('.email').text("*This field is required");
+            } else {
+                $('.email').text("");
+            }
+            if (phone.length == 0) {
+                $('.phone').text("*This field is required");
+            } else {
+                $('.phone').text("");
+            }
+            if (pincode.length == 0) {
+                $('.pincode').text("*This field is required");
+            } else {
+                $('.pincode').text("");
+            }
+            if (address.length == 0) {
+                $('.address').text("*This field is required");
+            } else {
+                $('.address').text("");
+            }
 
-                    if (orderData.id) {
-                        return orderData.id;
+            if (name.length == 0 || lastname.length == 0 || email.length == 0 || phone.length == 0 || pincode.length == 0 || address.length == 0) {
+                return false;
+            }
+        },
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '<?php echo $totalPrice; ?>' // Το ποσό πληρωμής
                     }
-                    const errorDetail = orderData?.details?.[0];
-                    const errorMessage = errorDetail
-                        ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
-                        : JSON.stringify(orderData);
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (orderData) {
+                const transaction = orderData.purchase_units[0].payments.captures[0];
 
-                    throw new Error(errorMessage);
-                } catch (error) {
-                    console.error(error);
-                    // resultMessage(`Could not initiate PayPal Checkout...<br><br>${error}`);
-                }
-            },
+                var name = $('#name').val();
+                var lastname = $('#lastname').val();
+                var email = $('#email').val();
+                var phone = $('#phone').val();
+                var pincode = $('#pincode').val();
+                var address = $('#address').val();
 
-            async onApprove(data, actions) {
-                try {
-                    const response = await fetch(
-                        `/api/orders/${data.orderID}/capture`,
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
+                var data = {
+                    'name': name,
+                    'lastname': lastname,
+                    'email': email,
+                    'phone': phone,
+                    'pincode': pincode,
+                    'address': address,
+                    'payment_mode': "Paid by Paypal",
+                    'payment_id': transaction.id,
+                    'placeOrderBtn': true
+                };
+
+                $.ajax({
+                    method: "POST",
+                    url: "functions/placeorder.php",
+                    data: data,
+                    cache: false, // Αποτροπή cache
+                    success: function (response) {
+                        console.log("AJAX Response: ", response);
+                        response = JSON.parse(response); // Αναλύστε το JSON
+
+                        if (response.status === 201) {
+                            alertify.success(response.message);
+                            // Κάντε ανακατεύθυνση χωρίς refresh
+                            window.location.href = response.redirect; // Ανακατεύθυνση στο URL που επιστρέφει το PHP
+                        } else {
+                            alertify.error('Failed to place order. Response: ' + response.message);
                         }
-                    );
-
-                    const orderData = await response.json();
-                    // Three cases to handle:
-                    //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-                    //   (2) Other non-recoverable errors -> Show a failure message
-                    //   (3) Successful transaction -> Show confirmation or thank you message
-
-                    const errorDetail = orderData?.details?.[0];
-
-                    if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
-                        // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-                        // recoverable state, per
-                        // https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
-                        return actions.restart();
-                    } else if (errorDetail) {
-                        // (2) Other non-recoverable errors -> Show a failure message
-                        throw new Error(
-                            `${errorDetail.description} (${orderData.debug_id})`
-                        );
-                    } else if (!orderData.purchase_units) {
-                        throw new Error(JSON.stringify(orderData));
-                    } else {
-                        // (3) Successful transaction -> Show confirmation or thank you message
-                        // Or go to another URL:  actions.redirect('thank_you.html');
-                        const transaction =
-                            orderData?.purchase_units?.[0]?.payments
-                                ?.captures?.[0] ||
-                            orderData?.purchase_units?.[0]?.payments
-                                ?.authorizations?.[0];
-                        resultMessage(
-                            `Transaction ${transaction.status}: ${transaction.id}<br>
-          <br>See console for all available details`
-                        );
-                        console.log(
-                            "Capture result",
-                            orderData,
-                            JSON.stringify(orderData, null, 2)
-                        );
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX Error: ", status, error);
                     }
-                } catch (error) {
-                    console.error(error);
-                    resultMessage(
-                        `Sorry, your transaction could not be processed...<br><br>${error}`
-                    );
-                }
-            },
-        })
-        .render("#paypal-button-container"); 
+                });
+            });
+        }
+    }).render('#paypal-button-container');
 </script>

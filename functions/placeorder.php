@@ -1,24 +1,20 @@
-<?php 
+<?php
 session_start();
 include '../config/db.php';
 
 
-if (isset($_SESSION['auth'])) 
-{
-    if(isset($_POST['placeOrderBtn']))
-    {
-        print_r($_POST); // Έλεγχος αν τα δεδομένα είναι σωστά
-        $name = mysqli_real_escape_string($conn,$_POST['name']);
-        $lastname = mysqli_real_escape_string($conn,$_POST['lastname']);
-        $email = mysqli_real_escape_string($conn,$_POST['email']);
-        $address = mysqli_real_escape_string($conn,$_POST['address']);
-        $phone = mysqli_real_escape_string($conn,$_POST['phone']);
-        $pincode = mysqli_real_escape_string($conn,$_POST['pincode']);
-        $payment_mode = mysqli_real_escape_string($conn,$_POST['payment_mode']);
-        $payment_id = mysqli_real_escape_string($conn,$_POST['payment_id']);
+if (isset($_SESSION['auth'])) {
+    if (isset($_POST['placeOrderBtn'])) {
+        $name = mysqli_real_escape_string($conn, $_POST['name']);
+        $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $address = mysqli_real_escape_string($conn, $_POST['address']);
+        $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+        $pincode = mysqli_real_escape_string($conn, $_POST['pincode']);
+        $payment_mode = mysqli_real_escape_string($conn, $_POST['payment_mode']);
+        $payment_id = mysqli_real_escape_string($conn, $_POST['payment_id']);
 
-        if($name == "" || $email == "" || $address == "" || $phone == "" || $pincode == "")
-        {
+        if ($name == "" || $email == "" || $address == "" || $phone == "" || $pincode == "") {
             $_SESSION['message'] = "Όλα τα πεδία είναι υποχρεωτικά";
             header('Location: ../checkout.php');
             exit(0);
@@ -29,24 +25,23 @@ if (isset($_SESSION['auth']))
         $query_run = mysqli_query($conn, $query);
 
         $totalPrice = 0;
-        foreach($query_run as $citem)
-        {
+        foreach ($query_run as $citem) {
             $totalPrice += $citem['selling_price'] * $citem['prod_qty'];
         }
 
-        $tracking_no = "eshop".rand(111, 999).substr($phone,2);
+        $tracking_no = "eshop" . rand(111, 999) . substr($phone, 2);
         $insert_query = "INSERT INTO orders (tracking_no, user_id, name, lastname, email, phone,	address, pincode, total_price, payment_mode, payment_id) VALUES ('$tracking_no', '$userId', '$name', '$lastname', '$email', '$phone', '$address','$pincode',  '$totalPrice', '$payment_mode', '$payment_id')";
-        $insert_query_run = mysqli_query($conn,  $insert_query);
+        $insert_query_run = mysqli_query($conn, $insert_query);
 
-        if( $insert_query_run){
+        if ($insert_query_run) {
             $order_id = mysqli_insert_id($conn);
-            foreach($query_run as $citem){
+            foreach ($query_run as $citem) {
                 $prod_id = $citem['prod_id'];
                 $prod_qty = $citem['prod_qty'];
                 $price = $citem['selling_price'];
 
                 $insert_items_query = "INSERT INTO order_items (order_id, prod_id, qty, price) VALUES ('$order_id', '$prod_id', '$prod_qty', '$price')";
-                $insert_items_query_run = mysqli_query($conn,  $insert_items_query);
+                $insert_items_query_run = mysqli_query($conn, $insert_items_query);
 
                 $product_query = "SELECT * FROM products WHERE id='$prod_id' LIMIT 1";
                 $product_query_run = mysqli_query($conn, $product_query);
@@ -63,13 +58,21 @@ if (isset($_SESSION['auth']))
             $deleteCartQuery = "DELETE FROM carts WHERE user_id='$userId'";
             $deleteCartQuery_run = mysqli_query($conn, $deleteCartQuery);
 
-            $_SESSION['message'] = "Order placed successfully"; 
-            header('Location: ../my-account.php?source=orders');
-            die();
+            if ($payment_mode === "COD") {
+                $_SESSION['message'] = "Order placed successfully";
+                echo json_encode(array("status" => 201, "message" => $_SESSION['message'], "redirect" => "../my-account.php?source=orders"));
+                exit();
+            } else if ($payment_mode === "Paid by Paypal") {
+                $_SESSION['message'] = "Order placed successfully";
+                echo json_encode(array("status" => 201, "message" => $_SESSION['message'], "redirect" => "../my-account.php?source=orders"));
+                exit();
+            } else {
+                echo json_encode(array("status" => 500, "message" => "Payment mode not recognized"));
+                exit();
+            }
         }
     }
-}
-else{
+} else {
     header('Location: ../index.php');
     exit();
 }
