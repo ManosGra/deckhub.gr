@@ -22,8 +22,8 @@
           if (mysqli_num_rows($select_categories_query) > 0) {
             // Επαναλαμβάνει τις γραμμές από το αποτέλεσμα της ερώτησης
             while ($item = mysqli_fetch_assoc($select_categories_query)) {
-              ?>
-              <li class="nav-item list-unstyled mx-auto d-block  font-rubik font-size-16">
+              ?> 
+              <li class="nav-item list-unstyled mx-3 font-rubik font-size-16">
                 <a class="nav-link" href="products.php?category=<?php echo htmlspecialchars($item['slug']); ?>">
                   <?php echo htmlspecialchars($item['category_name']); ?>
                 </a>

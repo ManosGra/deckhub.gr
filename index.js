@@ -242,10 +242,6 @@ $(document).ready(function () {
                 navigation.removeClass('scrolled');
                 $('#secondNav').removeClass('visible').fadeOut();
             }
-        } else {
-            // Στις άλλες σελίδες, διασφαλίζουμε ότι το secondNav είναι πάντα ορατό
-            navigation.addClass('scrolled');
-            $('#secondNav').addClass('visible').fadeIn();
         }
     });
 

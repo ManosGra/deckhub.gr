@@ -146,7 +146,7 @@
         <div class="col-md-12 text-center">
             <img src="../assets/6.png" class="img-fluid mb-2">
             <p class="text-white my-2 text-center">Καλησπέρα, Trainers!<br> Με χαρά ανακοινώνουμε ότι το Pokémon Stellar Crown είναι τώρα διαθέσιμο! Με εντυπωσιακά σχέδια και συναρπαστικό gameplay, είναι η τέλεια προσθήκη στη συλλογή σας. Μην το χάσετε—αποκτήστε το σήμερα και ξεκινήστε την περιπέτειά σας!</p>
-            <h2 class="fw-bold text-center ">Διαθέσιμο</h2>
+            <h2 class="fw-bold text-center ">ΔIΑΘΕΣΙΜΟ</h2>
         </div>
     </div>
 </section>
