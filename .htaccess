@@ -1,3 +1,8 @@
-RewriteEngine on
+RewriteEngine On
 
+# Ελέγχει αν το URL δεν είναι ήδη ένα αρχείο ή φάκελος
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Αφαιρεί την επέκταση .php από τα URLs
 RewriteRule ^(index|login-register)$ $1.php [NC,L]
