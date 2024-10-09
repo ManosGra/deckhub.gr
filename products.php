@@ -85,7 +85,6 @@ if (isset($_GET['category'])) {
                     </div>
                 </div>
             </div>
-
         </section>
         <?php
     } else {
