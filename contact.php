@@ -4,26 +4,27 @@
 <section id="contact" class="mt-4">
     <div class="container-lg">
 
-        <h1 class="mb-5  fw-bold">Φόρμα Επικοινωνίας</h1>
+        <h1 class="mb-4 fw-bold text-center">Φόρμα Επικοινωνίας</h1>
 
         <?php
         if (isset($_POST['submit'])) {
             $to = "manosgrammos9@gmail.com";
             $subject = $_POST['subject'];
             $body = $_POST['body'];
+            $header ="From: " .$_POST['email'];
 
             // Χρήση wordwrap αν οι γραμμές είναι πιο μακρές από 70 χαρακτήρες
             $body = wordwrap($body, 70);
 
             // Αποστολή email
             if (mail($to, $subject, $body)) {
-                echo "<p class='text-center bg-success bg-gradient rounded-2 text-white p-2'>Email sent successfully!</p>";
+                echo "<p class='text-center bg-success bg-gradient rounded-2 text-white p-1'>Email sent successfully!</p>";
             } else {
                 echo "<p>Failed to send email.</p>";
             }
         }
         ?>
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-md-6">
                 <p class="mb-4"><strong>Τηλέφωνο:</strong> 2100000000</p>
                 <p class="mb-1"><strong>Viber:</strong> 0000000000 (Μόνο γραπτά μηνύματα)</p>
