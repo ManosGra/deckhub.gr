@@ -31,7 +31,7 @@
                 <p class="mb-3"><strong>Messenger:</strong> <em>facebook.com/Someone (Μόνο γραπτά μηνύματα)</em></p>
                 <p class="mb-4"><strong>Email:</strong> test@gmail.com</p>
                 <p class="mb-3"><strong>Διεύθυνση:</strong><br> XXXX<br> XXX</p>
-                <p class="mb-0"><strong>Ωράριο Λειτουργείας:</strong><br class="mb-3"><p class="mt-3">Δευτέρα – Παρασκευή 15:30 – 17:30</p></p>
+                <p class="mb-0"><strong>Ωράριο Λειτουργίας:</strong><br class="mb-3"><p class="mt-3">Δευτέρα – Παρασκευή 15:30 – 17:30</p></p>
             </div>
 
             <div class="col-md-6">
