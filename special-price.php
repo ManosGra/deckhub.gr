@@ -34,7 +34,7 @@ if (mysqli_num_rows($result) > 0) {
                     <div class="item py-2 product_data">
                         <div class="product font-rale d-flex flex-column align-items-center">
 
-                            <a href="product-view.php?product=<?php echo $product['slug'] ?>">
+                            <a href="product-view?product=<?php echo $product['slug'] ?>">
                                 <div class="item-discount">
                                     
                                         <h5 class="discount text-dark my-3 fw-bold">-20%</h5>

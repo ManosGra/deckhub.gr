@@ -1,5 +1,3 @@
-RewriteEngine On
-
 # Ελέγχει αν το URL δεν είναι ήδη ένα αρχείο ή φάκελος
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

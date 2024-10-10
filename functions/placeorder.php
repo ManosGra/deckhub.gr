@@ -58,11 +58,11 @@ if (isset($_SESSION['auth'])) {
             $deleteCartQuery = "DELETE FROM carts WHERE user_id='$userId'";
             $deleteCartQuery_run = mysqli_query($conn, $deleteCartQuery);
 
-            if ($payment_mode === "COD") {
+            if ($payment_mode == "COD") {
                 $_SESSION['message'] = "Order placed successfully";
                 echo json_encode(array("status" => 201, "message" => $_SESSION['message'], "redirect" => "../my-account.php?source=orders"));
                 exit();
-            } else if ($payment_mode === "Paid by Paypal") {
+            } else if ($payment_mode == "Paid by Paypal") {
                 $_SESSION['message'] = "Order placed successfully";
                 echo json_encode(array("status" => 201, "message" => $_SESSION['message'], "redirect" => "../my-account.php?source=orders"));
                 exit();

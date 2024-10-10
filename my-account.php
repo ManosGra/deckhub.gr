@@ -20,12 +20,12 @@ include 'includes/navigation.php';
         <div class="row py-5">
             <div class="col-md-3">
                 <ul>
-                    <li class="list-unstyled"><a href="my-account.php" class="text-decoration-none">Πίνακας ελέγχου</a>
+                    <li class="list-unstyled"><a href="my-account" class="text-decoration-none">Πίνακας ελέγχου</a>
                     </li>
-                    <li class="list-unstyled"><a href="my-account.php?source=orders"
+                    <li class="list-unstyled"><a href="my-account?source=orders"
                             class="text-decoration-none">Παραγγελίες</a></li>
-                    <li class="list-unstyled"><a href="my-account.php?source=edit-profile" class="text-decoration-none">Στοιχεία λογαριασμού</a></li>
-                    <li class="list-unstyled"><a href="logout.php" class="text-decoration-none">Αποσύνδεση</a></li>
+                    <li class="list-unstyled"><a href="my-account?source=edit-profile" class="text-decoration-none">Στοιχεία λογαριασμού</a></li>
+                    <li class="list-unstyled"><a href="logout" class="text-decoration-none">Αποσύνδεση</a></li>
                 </ul>
             </div>
 

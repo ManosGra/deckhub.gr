@@ -107,7 +107,7 @@ if (mysqli_num_rows($cartItems) == 0) {
                                     $totalPrice += $citem['selling_price'] * $citem['prod_qty']; ?>
                                     <tr class="product_data align-items-center">
                                         <td class="align-middle text-center">
-                                            <img src="uploads/<?php echo $citem['item_image']; ?>" class="lazy" alt="Image"
+                                            <img data-src="uploads/<?php echo $citem['item_image']; ?>" class="lazy" alt="Image"
                                                 width="100px">
                                         </td>
                                         <td class="align-middle text-center"><?php echo $citem['name']; ?></td>

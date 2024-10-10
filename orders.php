@@ -21,7 +21,7 @@
                         <td><?php echo $item['tracking_no']; ?></td>
                         <td><?php echo $item['total_price']; ?></td>
                         <td><?php echo $item['created_at']; ?></td>
-                        <td><a href="my-account.php?source=view-order&t=<?php echo $item['tracking_no']; ?>" class="btn btn-primary my-2">View Details</a></td>
+                        <td><a href="my-account?source=view-order&t=<?php echo $item['tracking_no']; ?>" class="btn btn-primary my-2">View Details</a></td>
                     </tr>
 
                 <?php }

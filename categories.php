@@ -16,7 +16,7 @@
                             $colClass = "col-md-6"; // Όλες οι κατηγορίες - 2 στήλες (col-6)
                             ?>
                             <div class="<?php echo $colClass; ?> my-3">
-                                <a class="text-decoration-none" href="products.php?category=<?php echo $item['slug']; ?>">
+                                <a class="text-decoration-none" href="products?category=<?php echo $item['slug']; ?>">
                                     <div class="meta-title-description">
                                         <img data-src="uploads/<?php echo $item['category_image']; ?>" alt="Category Image"
                                             class="rounded-4 w-100 box-shadow img-fluid category-bg" style="height:356px">

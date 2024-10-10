@@ -34,7 +34,7 @@ include 'includes/navigation.php';
                                         <div class="card shadow-lg product-box product_data box show pt-3">
                                             <div class="card-body p-0">
                                                 <div class="product-image">
-                                                    <a class="text-decoration-none" href="product-view.php?product=<?php echo $item['slug'] ?>">
+                                                    <a class="text-decoration-none" href="product-view?product=<?php echo $item['slug'] ?>">
                                                         <img src="uploads/<?php echo $item['item_image'] ?>" alt="Product Image" class="w-100 p-3" style="height:300px">
                                                     </a>
                                                 </div>
@@ -42,13 +42,13 @@ include 'includes/navigation.php';
                                                     <p class="font-size-25 fw-bold text-center mb-1"><?php echo $item['selling_price']; ?>€</p>
                                                 </div>
                                                 <div class="product-info">
-                                                    <a class="text-decoration-none" href="product-view.php?product=<?php echo $item['slug'] ?>">
+                                                    <a class="text-decoration-none" href="product-view?product=<?php echo $item['slug'] ?>">
                                                         <p class="text-center font-size-20 text-dark px-3 mb-1"><?php echo $item['name']; ?></p>
                                                     </a>
                                                     <p class="text-center"><small>Διαθέσιμα: <?php echo $item['qty']; ?></small>+</p>
                                                 </div>
                                                 <div class="product-btns d-flex flex-row align-items-center justify-content-around">
-                                                    <a href="product-view.php?product=<?php echo $item['slug'] ?>" class="text-decoration-none product-btn w-100 text-center p-2">
+                                                    <a href="product-view?product=<?php echo $item['slug'] ?>" class="text-decoration-none product-btn w-100 text-center p-2">
                                                         <i class="bi bi-search text-white font-size-20"></i>
                                                     </a>
                                                     <button class="product-btn addToCartBtn w-100 text-center p-2" value="<?php echo $item['id']; ?>">

@@ -65,7 +65,7 @@ if (!isset($_SESSION['auth']) || empty($_SESSION['auth'])) {
                     <!-- Checkout button below the table -->
                     <?php if (mysqli_num_rows($items) > 0) { ?>
                         <div class="text-center">
-                            <a href="checkout.php" class="btn btn-outline-primary">Συνέχεια<i class="bi bi-arrow-right-circle ms-2 align-middle fw-bold"></i></a>
+                            <a href="checkout" class="btn btn-outline-primary">Συνέχεια<i class="bi bi-arrow-right-circle ms-2 align-middle fw-bold"></i></a>
                         </div>
                     <?php } ?>
                 </div>

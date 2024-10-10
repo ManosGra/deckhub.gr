@@ -31,7 +31,7 @@ if (mysqli_num_rows($result) > 0) {
                 <?php foreach ($activeProducts as $product): ?>
                     <div class="item py-2 product_data">
                         <div class="product font-rale d-flex flex-column align-items-center">
-                            <a href="product-view.php?product=<?php echo $product['slug'] ?>"><img data-src="uploads/<?php echo $product['item_image']; ?>"
+                            <a href="product-view?product=<?php echo $product['slug'] ?>"><img data-src="uploads/<?php echo $product['item_image']; ?>"
                                     alt="<?php echo $product['name']; ?>" style="width:220px; height:220px;" 
                                     ></a>
                             <div class="text-center my-3">

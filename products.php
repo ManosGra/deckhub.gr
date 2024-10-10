@@ -15,7 +15,7 @@ if (isset($_GET['category'])) {
 
         <section id="products" class="box show">
             <div class="container-lg">
-                <h6><a class="text-decoration-none" href="index.php">Home/ </a><?php echo $category['category_name']; ?></h6>
+                <h6><a class="text-decoration-none" href="index">Home/ </a><?php echo $category['category_name']; ?></h6>
                 <div class="row">
                     <div class="col-lg-2 col-12">
                         <?php include 'filters.php' ?>
@@ -38,7 +38,7 @@ if (isset($_GET['category'])) {
                                             <div class="card-body p-0">
                                                 <div class="product-image">
                                                     <a class="text-decoration-none"
-                                                        href="product-view.php?product=<?php echo $item['slug'] ?>"><img
+                                                        href="product-view?product=<?php echo $item['slug'] ?>"><img
                                                             src="uploads/<?php echo $item['item_image'] ?>" alt="Product Image"
                                                             class="w-100 p-3" style="height:300px"></a>
                                                 </div>
@@ -51,7 +51,7 @@ if (isset($_GET['category'])) {
 
                                                 <div class="product-info">
                                                     <a class="text-decoration-none"
-                                                        href="product-view.php?product=<?php echo $item['slug'] ?>">
+                                                        href="product-view?product=<?php echo $item['slug'] ?>">
                                                         <p class="text-center font-size-20 text-dark px-3 mb-1">
                                                             <?php echo $item['name']; ?>
                                                         </p>
@@ -63,7 +63,7 @@ if (isset($_GET['category'])) {
                                                 </div>
 
                                                 <div class="product-btns d-flex flex-row align-items-center justify-content-around">
-                                                    <a href="product-view.php?product=<?php echo $item['slug'] ?>"
+                                                    <a href="product-view?product=<?php echo $item['slug'] ?>"
                                                         class="text-decoration-none product-btn w-100 text-center p-2"><i
                                                             class="bi bi-search text-white font-size-20"></i></a>
 

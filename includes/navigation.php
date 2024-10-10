@@ -24,7 +24,7 @@
             while ($item = mysqli_fetch_assoc($select_categories_query)) {
               ?> 
               <li class="nav-item list-unstyled mx-3 font-rubik font-size-16">
-                <a class="nav-link" href="products.php?category=<?php echo htmlspecialchars($item['slug']); ?>">
+                <a class="nav-link" href="products?category=<?php echo htmlspecialchars($item['slug']); ?>">
                   <?php echo htmlspecialchars($item['category_name']); ?>
                 </a>
               </li>
@@ -48,14 +48,14 @@
           </div>
 
           <div class="col-auto">
-            <a href="my-account.php" class="text-white text-decoration-none">
+            <a href="my-account" class="text-white text-decoration-none">
               <i class="font-size-25 profile bi bi-person-circle"></i>
             </a>
           </div>
 
           <div class="col-auto">
             <form action="" class="font-size-14 font-rale">
-              <a href="cart.php" class="text-decoration-none" id="cart-link">
+              <a href="cart" class="text-decoration-none" id="cart-link">
                 <div class="cart-object">
                   <span class="font-size-25 text-white"><i class="bi bi-cart cart-icon"></i></span>
                   <span class="pill text-white bg-danger" id="cart-empty">0</span>
@@ -74,7 +74,7 @@
 
       <!-- Το search container που θες να κάνεις popup -->
       <div class="search-container">
-        <form class="d-flex align-items-center" action="search.php" method="POST">
+        <form class="d-flex align-items-center" action="search" method="POST">
           <input type="text" placeholder="Αναζήτηση..." name="search" class="search-input" required>
           <button type="submit" name="submit" hidden>Search</button>
         </form>
@@ -106,7 +106,7 @@
           while ($item = mysqli_fetch_assoc($select_categories_query)) {
             ?>
             <li class="nav-item list-unstyled font-rubik fw-bold font-size-14">
-              <a class="nav-link" href="products.php?category=<?php echo htmlspecialchars($item['slug']); ?>">
+              <a class="nav-link" href="products?category=<?php echo htmlspecialchars($item['slug']); ?>">
                 <?php echo htmlspecialchars($item['category_name']); ?>
               </a>
             </li>
@@ -126,13 +126,13 @@
     <div class="col-auto">
       <div class="row align-items-center justify-content-end g-0 font-size-25">
         <div class="col-auto">
-          <a href="my-account.php" class="text-white text-decoration-none ">
+          <a href="my-account" class="text-white text-decoration-none ">
             <i class="profile bi bi-person-circle"></i>
           </a>
         </div>
         <div class="col-auto">
           <form action="" class="font-rale">
-            <a href="cart.php" class="text-decoration-none" id="cart-link">
+            <a href="cart" class="text-decoration-none" id="cart-link">
               <div class="cart-object">
                 <span class="px-2 text-white"><i class="bi bi-cart cart-icon ms-2"></i></span>
               </div>
