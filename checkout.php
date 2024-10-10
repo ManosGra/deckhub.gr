@@ -224,8 +224,8 @@ if (mysqli_num_rows($cartItems) == 0) {
                     data: data,
                     success: function (response) {
                         if (response == 201) {
+                            alertify.success("Η παραγγελία τοποθετήθηκε επιτυχώς!");
                             window.location.href = 'my-account?source=orders';
-                            alertify.success("Επιτυχής Αγορά");
                         } else {
                             alertify.error('Failed to place order. Response: ' + response.message);
                         }
