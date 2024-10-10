@@ -6,7 +6,7 @@
         <h4 class="fw-bold  font-size-20">Πληροφορίες</h4>
         <div class="d-flex flex-column flex-wrap">
           <a href="#" class="text-decoration-none  font-size-14 text-white-50 pb-1">Σχετικά με εμάς</a>
-          <a href="#" class="text-decoration-none  font-size-14 text-white-50 pb-1">Φόρμα Επικοινωνίας</a>
+          <a href="contact" class="text-decoration-none  font-size-14 text-white-50 pb-1">Φόρμα Επικοινωνίας</a>
         </div>
       </div>
 

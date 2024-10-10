@@ -372,6 +372,10 @@ img.fade-in {
     margin: 0 !important;
   }
 }
+#contact {
+  padding: 90px 0;
+}
+
 .font-baloo {
   font-family: "Baloo Thambi 2", cursive;
 }
