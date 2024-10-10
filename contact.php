@@ -2,29 +2,27 @@
 <?php //include 'includes/navigation.php' ?>
 
 <?php 
-
-// the message
-$msg = "First line of text\nSecond line of text";
-
-// use wordwrap() if lines are longer than 70 characters
-$msg = wordwrap($msg,70);
-
-// send email
-mail("manosgrammos9@gmail.com","My subject",$msg);
-
 if(isset($_POST['submit'])){
     $to = "manosgrammos9@gmail.com";
     $subject = $_POST['subject'];
     $body = $_POST['body'];
+    
+    // Χρήση wordwrap αν οι γραμμές είναι πιο μακρές από 70 χαρακτήρες
+    $body = wordwrap($body, 70);
+
+    // Αποστολή email
+    if(mail($to, $subject, $body)){
+        echo "<p>Email sent successfully!</p>";
+    } else {
+        echo "<p>Failed to send email.</p>";
+    }
 }
-
-
 ?>
 
 <section id="contact" class="w-50 d-block mx-auto">
     <div class="container-lg">
         <h1 class="my-4 text-center fw-bold">Φόρμα Επικοινωνίας</h1>
-        <form action="functions/authcode.php" method="post">
+        <form action="" method="post"> <!-- Αλλαγή της action σε "" για την τρέχουσα σελίδα -->
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
@@ -37,7 +35,7 @@ if(isset($_POST['submit'])){
             </div>
 
             <div class="mb-3 w-100">
-                <textarea class="w-100 form-control border border-black" name="body" id="body" cols="50" rows="10" style="height:170px;"></textarea>
+                <textarea class="w-100 form-control border border-black" name="body" id="body" cols="50" rows="10" style="height:170px;" required></textarea>
             </div>
 
             <input type="submit" name="submit" class="btn btn-primary w-100" value="Submit">
