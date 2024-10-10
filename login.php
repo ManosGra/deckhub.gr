@@ -1,4 +1,4 @@
-<div class="card shadow-lg">
+<div class="card shadow-lg login-form">
     <div class="card-body">
         <h2 class="mb-4 login-header" style="max-width: 400px; margin: 0 auto;">Σύνδεση</h2>
         <form action="functions/authcode.php" method="post" style="max-width: 400px; margin: 0 auto;">
