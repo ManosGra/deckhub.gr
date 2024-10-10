@@ -78,10 +78,6 @@ if (mysqli_num_rows($cartItems) == 0) {
                                         placeholder="Ταχυδρομικός Κωδικός" required>
                                     <small class="text-danger pincode"></small>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <input type="hidden" name="payment_mode" value="COD">
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,10 +120,9 @@ if (mysqli_num_rows($cartItems) == 0) {
                     <h5>Σύνολο : <span class="float-end fw-bold"><?php echo $totalPrice; ?>€</span></h5>
 
                     <div class="">
-
+                        <input type="hidden" name="payment_mode" value="COD">
                         <button type="submit" name="placeOrderBtn" class="btn btn-primary w-100">Confirm and place order
                             | COD</button>
-
                         <div id="paypal-button-container" class="mt-3"></div>
                     </div>
                 </div>
@@ -141,7 +136,7 @@ if (mysqli_num_rows($cartItems) == 0) {
 <script
     src="https://www.paypal.com/sdk/js?client-id=AfKKVavIPXWqOTrE1le96PxC-lvpYIdWHZMfP9Vz8nZfHacg8uCboZteyXkrNMIZfwjfxKZpvGTDDVhD&currency=EUR"></script>
 
-<script>
+    <script>
     paypal.Buttons({
         onClick() {
             var name = $('#name').val();
@@ -224,8 +219,9 @@ if (mysqli_num_rows($cartItems) == 0) {
                     data: data,
                     success: function (response) {
                         if (response == 201) {
-                            alertify.success("Η παραγγελία τοποθετήθηκε επιτυχώς!");
-                            window.location.href = 'my-account?source=orders';
+                            alertify.alert("Η παραγγελία ολοκληρώθηκε επιτυχώς!", function () {
+                                window.location.href = 'my-account?source=orders';
+                            });
                         } else {
                             alertify.error('Failed to place order. Response: ' + response.message);
                         }
