@@ -223,21 +223,13 @@ if (mysqli_num_rows($cartItems) == 0) {
                     method: "POST",
                     url: "functions/placeorder.php",
                     data: data,
-                    cache: false, // Αποτροπή cache
                     success: function (response) {
-                        console.log("AJAX Response: ", response);
-                        response = JSON.parse(response); // Αναλύστε το JSON
-
-                        if (response.status === 201) {
-                            alertify.success(response.message);
-                            // Κάντε ανακατεύθυνση χωρίς refresh
-                            window.location.href = response.redirect; // Ανακατεύθυνση στο URL που επιστρέφει το PHP
+                        if (response == 201) {
+                            window.location.href = 'my-account?source=orders';
+                            alertify.success("Order Placed Successfully");
                         } else {
                             alertify.error('Failed to place order. Response: ' + response.message);
                         }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("AJAX Error: ", status, error);
                     }
                 });
             });
