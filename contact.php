@@ -25,9 +25,9 @@
         ?>
         <div class="row">
             <div class="col-md-6">
-                <p class="mb-4"><strong>Τηλέφωνο:</strong> 2101234567</p>
-                <p class="mb-1"><strong>Viber:</strong> 6971762734 (Μόνο γραπτά μηνύματα)</p>
-                <p class="mb-3"><strong>Messenger:</strong> facebook.com/Someone (Μόνο γραπτά μηνύματα) </p>
+                <p class="mb-4"><strong>Τηλέφωνο:</strong> 2100000000</p>
+                <p class="mb-1"><strong>Viber:</strong> 0000000000 (Μόνο γραπτά μηνύματα)</p>
+                <p class="mb-3"><strong>Messenger:</strong> <em>facebook.com/Someone (Μόνο γραπτά μηνύματα)</em></p>
                 <p class="mb-4"><strong>Email:</strong> test@gmail.com</p>
                 <p class="mb-3"><strong>Διεύθυνση:</strong><br> XXXX<br> XXX</p>
                 <p class="mb-0"><strong>Ωράριο Λειτουργείας:</strong><br class="mb-3"><p class="mt-3">Δευτέρα – Παρασκευή 15:30 – 17:30</p></p>
