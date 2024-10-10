@@ -59,7 +59,7 @@ if (isset($_SESSION['auth'])) {
             $deleteCartQuery_run = mysqli_query($conn, $deleteCartQuery);
 
             if ($payment_mode == "COD") {
-                $_SESSION['message'] = "Order placed successfully";
+                $_SESSION['message'] = "Επιτυχής Αγορά";
                 header('Location: ../my-account?source=orders');
                 die();
             }else{

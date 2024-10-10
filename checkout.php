@@ -142,7 +142,6 @@ if (mysqli_num_rows($cartItems) == 0) {
     src="https://www.paypal.com/sdk/js?client-id=AfKKVavIPXWqOTrE1le96PxC-lvpYIdWHZMfP9Vz8nZfHacg8uCboZteyXkrNMIZfwjfxKZpvGTDDVhD&currency=EUR"></script>
 
 <script>
-
     paypal.Buttons({
         onClick() {
             var name = $('#name').val();
@@ -226,7 +225,7 @@ if (mysqli_num_rows($cartItems) == 0) {
                     success: function (response) {
                         if (response == 201) {
                             window.location.href = 'my-account?source=orders';
-                            alertify.success("Order Placed Successfully");
+                            alertify.success("Επιτυχής Αγορά");
                         } else {
                             alertify.error('Failed to place order. Response: ' + response.message);
                         }
