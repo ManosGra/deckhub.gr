@@ -205,7 +205,7 @@ $(document).ready(function () {
         $('.product-col').css('display', 'flex');
     }
 
-    // Lazy loading for images
+    // Επιλέγουμε όλες τις εικόνες με το data-src attribute (lazy-loaded)
     const lazyLoadImages = document.querySelectorAll('img[data-src]');
     const options = {
         root: null,
@@ -213,20 +213,27 @@ $(document).ready(function () {
         threshold: 0.1
     };
 
+    // Συνάρτηση για την αλλαγή της πηγής της εικόνας και την προσθήκη εφέ fade-in
     const lazyLoad = (image) => {
+        // Προσθέτουμε προσωρινά μία διαφανή εικόνα μέχρι να φορτώσει η πραγματική
         image.src = image.dataset.src;
+        image.onload = () => {
+            image.classList.add('fade-in'); // Προσθέτουμε την κλάση για εφέ fade-in
+        };
         image.classList.remove('lazy');
     };
 
+    // Δημιουργούμε έναν IntersectionObserver για να παρατηρεί πότε η εικόνα εμφανίζεται στην οθόνη
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 lazyLoad(entry.target);
-                observer.unobserve(entry.target);
+                observer.unobserve(entry.target); // Σταματάμε την παρατήρηση μόλις φορτωθεί η εικόνα
             }
         });
     }, options);
 
+    // Παρατηρούμε κάθε εικόνα
     lazyLoadImages.forEach(image => {
         observer.observe(image);
     });
@@ -287,17 +294,17 @@ const openSearch = document.getElementById('openSearch');
 const closePopup = document.getElementById('closePopup');
 
 // Άνοιγμα του popup όταν γίνει κλικ στο κουμπί
-openSearch.addEventListener('click', function() {
+openSearch.addEventListener('click', function () {
     searchPopup.style.display = 'block';
 });
 
 // Κλείσιμο του popup όταν γίνει κλικ στο κουμπί "κλείσιμο"
-closePopup.addEventListener('click', function() {
+closePopup.addEventListener('click', function () {
     searchPopup.style.display = 'none';
 });
 
 // Κλείσιμο του popup όταν γίνει κλικ έξω από το popup
-window.addEventListener('click', function(event) {
+window.addEventListener('click', function (event) {
     if (event.target === searchPopup) {
         searchPopup.style.display = 'none';
     }

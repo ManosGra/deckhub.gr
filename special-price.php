@@ -41,7 +41,7 @@ if (mysqli_num_rows($result) > 0) {
                                    
                                 </div>
 
-                                <img class="img-fluid"  src="uploads/<?php echo $product['item_image']; ?>" alt="<?php echo $product['name']; ?>" style="width:220px; height:220px;">
+                                <img class="img-fluid"  data-src="uploads/<?php echo $product['item_image']; ?>" alt="<?php echo $product['name']; ?>" style="width:220px; height:220px;">
                             </a>
 
                             <div class="text-center my-3">

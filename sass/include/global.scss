@@ -194,6 +194,17 @@ button:focus {
     }
 }
 
+/* Αρχικά κρύβουμε την εικόνα και προσθέτουμε εφέ για ομαλή εμφάνιση */
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+/* Όταν η εικόνα φορτωθεί, γίνεται πλήρως ορατή */
+img.fade-in {
+    opacity: 1;
+}
+
 #search {
     padding: 120px 0;
 }
