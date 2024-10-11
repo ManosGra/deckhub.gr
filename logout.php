@@ -12,5 +12,5 @@ session_unset();
 session_destroy();
 
 // Ανακατεύθυνση στην αρχική σελίδα
-header("Location: ../login-register.php");
+header("Location: ../login-register");
 exit();

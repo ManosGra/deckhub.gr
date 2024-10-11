@@ -80,23 +80,23 @@ if (isset($_POST['login_btn'])) {
             // Έλεγχος ρόλου χρήστη
             if ($userdata['user_role'] == '1') {
                 $_SESSION['message'] = "Καλώς ήρθατε στον Πίνακα Ελέγχου";
-                header('Location: ../admin/index.php');
+                header('Location: ../administration/index.php');
                 exit();
             } else {
                 $_SESSION['message'] = "Σύνδεση με επιτυχία";
-                header('Location: ../my-account.php');
+                header('Location: ../my-account');
                 exit();
             }
         } else {
             // Μη έγκυρος κωδικός πρόσβασης
             $_SESSION['message'] = "Μη έγκυρες διαπιστεύσεις";
-            header('Location: ../my-account.php');
+            header('Location: ../my-account');
             exit();
         }
     } else {
         // Μη έγκυρο όνομα χρήστη
         $_SESSION['message'] = "Μη έγκυρο όνομα χρήστη";
-        header('Location: ../my-account.php');
+        header('Location: ../my-account');
         exit();
     }
 
