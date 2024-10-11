@@ -1,8 +1,22 @@
 <?php
-// Δημιουργία ενός τυχαίου και ασφαλούς token
-$token = bin2hex(random_bytes(16));  // 32 χαρακτήρες (16 bytes)
+// Συμπερίληψη της σύνδεσης στη βάση δεδομένων
+include('../config/db.php');
 
-// Αποθήκευση του token στην βάση δεδομένων ή σε ένα αρχείο
-// Για απλότητα, το εκτυπώνουμε απλά
-echo "Το URL για το Admin Panel είναι: ";
-echo "http://deckhub.local/admin/?token=" . $token;
+// Δημιουργία ενός μόνιμου και ασφαλούς token (μόνο μία φορά)
+$token = bin2hex(random_bytes(16));  // Δημιουργία 32 χαρακτήρων (16 bytes)
+
+// Δημιουργία πίνακα (αν δεν υπάρχει ήδη)
+$query = "CREATE TABLE IF NOT EXISTS admin_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(64) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+$conn->query($query);
+
+// Αποθήκευση του token στη βάση δεδομένων
+$query = "INSERT INTO admin_tokens (token) VALUES ('$token')";
+$conn->query($query);
+
+// Εμφάνιση του token
+echo "Το μόνιμο token για το Admin Panel είναι: http://deckhub.local/admin/?token=" . $token;
+?>

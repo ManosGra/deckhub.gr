@@ -1,3 +1,4 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <div class="card shadow-lg login-form">
     <div class="card-body">
         <h2 class="mb-4 login-header" style="max-width: 400px; margin: 0 auto;">Σύνδεση</h2>
