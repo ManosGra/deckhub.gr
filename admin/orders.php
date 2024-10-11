@@ -3,6 +3,17 @@ include 'includes/header.php';
 include '../middleware/adminMiddleware.php';
 ?>
 
+<?php 
+
+// Έλεγχος αν η συνεδρία είναι ενεργή και ο χρήστης είναι συνδεδεμένος
+if (!isset($_SESSION['user_role'])) {
+    // Αν δεν είναι συνδεδεμένος, ανακατεύθυνση στη σελίδα login
+    header("Location: ../login.php");
+    exit();
+}
+
+?>
+
 <div class="container-lg">
     <div class="row">
         <div class="col-md-12">

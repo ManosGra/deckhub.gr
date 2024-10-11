@@ -14,3 +14,4 @@ session_destroy();
 // Ανακατεύθυνση στην αρχική σελίδα
 header("Location: ../login.php");
 exit();
+

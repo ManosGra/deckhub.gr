@@ -1,4 +1,14 @@
-<?php include 'includes/header.php' ?>
+<?php 
+include 'includes/header.php';
+
+
+// Έλεγχος αν η συνεδρία είναι ενεργή και ο χρήστης είναι συνδεδεμένος
+if (!isset($_SESSION['user_role'])) {
+    // Αν δεν είναι συνδεδεμένος, ανακατεύθυνση στη σελίδα login
+    header("Location: ../login.php");
+    exit();
+}
+?>
 
 <div class="container-lg">
     <div class="row mt-4">

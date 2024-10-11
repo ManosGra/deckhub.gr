@@ -20,6 +20,17 @@ if (isset($_GET['t'])) {
 $data = mysqli_fetch_array($orderData);
 ?>
 
+<?php 
+
+// Έλεγχος αν η συνεδρία είναι ενεργή και ο χρήστης είναι συνδεδεμένος
+if (!isset($_SESSION['user_role'])) {
+    // Αν δεν είναι συνδεδεμένος, ανακατεύθυνση στη σελίδα login
+    header("Location: ../login.php");
+    exit();
+}
+
+?>
+
 
 
 <div class="container-lg">
