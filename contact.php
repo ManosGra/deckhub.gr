@@ -45,7 +45,7 @@
                     <div class="mb-3">
                         <label for="subject" class="form-label d-none">Subject</label>
                         <input type="text" name="subject" class="form-control border border-black" id="subject"
-                            placeholder="Enter your Subject" required>
+                            placeholder="Tίτλος" required>
                     </div>
 
                     <div class="mb-3 w-100">
