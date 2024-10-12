@@ -19,5 +19,5 @@
         <input type="password" name="cpassword" class="form-control border border-black" id="cpassword" required>
     </div>
 
-    <input type="submit" name="register_btn" class="btn btn-primary" value="Register">
+    <input type="submit" name="register_btn" class="btn btn-primary" value="Εγγραφή">
 </form>

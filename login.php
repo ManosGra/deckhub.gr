@@ -13,7 +13,11 @@
                 <input type="password" name="password" class="form-control border border-black" required>
             </div>
 
-            <input type="submit" name="login_btn" class="btn btn-primary" value="Login">
+            <input type="submit" name="login_btn" class="btn btn-primary my-3" value="Σύνδεση">
+
+            <div class="form-group">
+                <a href="forgot.php">Ξέχασα το συνθηματικό μου</a>
+            </div>
         </form>
     </div>
 </div>
