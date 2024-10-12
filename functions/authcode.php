@@ -60,11 +60,11 @@ if (isset($_POST['register_btn'])) {
                     $mail->Port = 25;  // Θύρα του Papercut (ή 587 αν χρησιμοποιείς TLS)
 
                     // Ρυθμίσεις email
-                    $mail->setFrom('your-email@example.com', 'Your Name'); // Το email μπορεί να είναι οποιοδήποτε για δοκιμές
+                    $mail->setFrom('infodeckhub@example.com'); // Το email μπορεί να είναι οποιοδήποτε για δοκιμές
                     $mail->addAddress($email, $name); // Αποδέκτης
                     $mail->isHTML(true);
                     $mail->Subject = 'Ενεργοποίηση Λογαριασμού';
-                    $mail->Body = "<p>Παρακαλώ κάντε κλικ στο παρακάτω σύνδεσμο για να ενεργοποιήσετε το λογαριασμό σας:</p><p><a href='$activation_link'>$activation_link</a></p>";
+                    $mail->Body = "Παρακαλώ κάντε κλικ στο παρακάτω σύνδεσμο για να ενεργοποιήσετε το λογαριασμό σας:<a href='$activation_link'>$activation_link</a>";
 
                     // Στείλτε το email
                     $mail->send();
