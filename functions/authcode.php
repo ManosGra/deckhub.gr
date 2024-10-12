@@ -3,10 +3,11 @@ session_start();
 include '../config/db.php'; // Σύνδεση στη βάση δεδομένων
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require '../vendor/autoload.php'; 
+require '../vendor/autoload.php';
 
 // Συνάρτηση για την ανακατεύθυνση με μήνυμα
-function redirectWithMessage($message, $location = '../login-register.php') {
+function redirectWithMessage($message, $location = '../login-register')
+{
     $_SESSION['message'] = $message;
     header("Location: $location");
     exit();
@@ -34,7 +35,7 @@ if (isset($_POST['register_btn'])) {
 
     if ($stmt->num_rows > 0) {
         $_SESSION['message'] = "Αυτό το email χρησιμοποιείται ήδη.";
-        header('Location: ../login-register.php');
+        header('Location: ../login-register');
         exit();
     } else {
         // Έλεγχος αν οι κωδικοί ταιριάζουν
@@ -46,7 +47,7 @@ if (isset($_POST['register_btn'])) {
 
             if ($stmt->execute()) {
                 // Δημιουργία του σύνδεσμου ενεργοποίησης
-                $activation_link = "http://localhost/yourwebsite/activate.php?token=$activation_token";
+                $activation_link = "http://deckhub.local/activate.php?token=$activation_token";
 
                 // Εδώ ξεκινά ο κώδικας για την αποστολή του email ενεργοποίησης
                 $mail = new PHPMailer(true);
@@ -62,7 +63,7 @@ if (isset($_POST['register_btn'])) {
                     $mail->addAddress($email, $name); // Αποδέκτης
                     $mail->isHTML(true);
                     $mail->Subject = 'Ενεργοποίηση Λογαριασμού';
-                    $mail->Body    = "<p>Παρακαλώ κάντε κλικ στο παρακάτω σύνδεσμο για να ενεργοποιήσετε το λογαριασμό σας:</p><p><a href='$activation_link'>$activation_link</a></p>";
+                    $mail->Body = "<p>Παρακαλώ κάντε κλικ στο παρακάτω σύνδεσμο για να ενεργοποιήσετε το λογαριασμό σας:</p><p><a href='$activation_link'>$activation_link</a></p>";
 
                     // Στείλτε το email
                     $mail->send();
@@ -71,16 +72,16 @@ if (isset($_POST['register_btn'])) {
                     $_SESSION['message'] = "Το email ενεργοποίησης δεν μπόρεσε να αποσταλεί. Σφάλμα: {$mail->ErrorInfo}";
                 }
 
-                header('Location: ../login-register.php');
+                header('Location: ../login-register');
                 exit();
             } else {
                 $_SESSION['message'] = "Κάτι πήγε στραβά: " . $stmt->error;
-                header('Location: ../login-register.php');
+                header('Location: ../login-register');
                 exit();
             }
         } else {
             $_SESSION['message'] = "Οι κωδικοί δεν ταιριάζουν.";
-            header('Location: ../login-register.php');
+            header('Location: ../login-register');
             exit();
         }
     }
@@ -121,7 +122,7 @@ if (isset($_POST['login_btn'])) {
             if ($userdata['user_role'] == '1') {
                 redirectWithMessage("Καλώς ήρθατε στον Πίνακα Ελέγχου", '../administration/index.php');
             } else {
-                redirectWithMessage("Σύνδεση με επιτυχία", '../my-account.php');
+                redirectWithMessage("Σύνδεση με επιτυχία", '../my-account');
             }
         } else {
             redirectWithMessage("Μη έγκυρες διαπιστεύσεις");

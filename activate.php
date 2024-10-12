@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../config/db.php'; // Σύνδεση στη βάση δεδομένων
+include 'config/db.php'; // Σύνδεση στη βάση δεδομένων
 
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
@@ -18,15 +18,14 @@ if (isset($_GET['token'])) {
         $stmt->execute();
 
         $_SESSION['message'] = "Ο λογαριασμός σας έχει ενεργοποιηθεί με επιτυχία!";
-        header('Location: ../login-register.php');
+        header('Location: ../login-register');
     } else {
         $_SESSION['message'] = "Το token δεν είναι έγκυρο!";
-        header('Location: ../login-register.php');
+        header('Location: ../login-register');
     }
     $stmt->close();
 } else {
     $_SESSION['message'] = "Δεν βρέθηκε token για ενεργοποίηση.";
-    header('Location: ../login-register.php');
+    header('Location: ../login-register');
 }
 $conn->close();
-?>
