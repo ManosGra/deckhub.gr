@@ -1,6 +1,13 @@
 <?php
 session_start();
 include '../config/db.php'; // Σύνδεση στη βάση δεδομένων
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor/autoload.php'; 
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
 
 if (isset($_POST['register_btn'])) {
     // Λήψη δεδομένων από τη φόρμα εγγραφής
@@ -11,6 +18,9 @@ if (isset($_POST['register_btn'])) {
 
     // Προεπιλεγμένος ρόλος
     $default_role = '0';
+
+    // Δημιουργία του token για ενεργοποίηση
+    $activation_token = md5(rand());
 
     // Έλεγχος αν το email υπάρχει ήδη στη βάση δεδομένων
     $stmt = $conn->prepare("SELECT user_email FROM user WHERE user_email = ?");
@@ -26,12 +36,39 @@ if (isset($_POST['register_btn'])) {
         // Έλεγχος αν οι κωδικοί ταιριάζουν
         if ($password === $cpassword) {
             // Χρήση προετοιμασμένων εντολών για την εισαγωγή χρήστη
-            $stmt = $conn->prepare("INSERT INTO user (username, user_email, user_password, user_role) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO user (username, user_email, user_password, user_role, activation_token) VALUES (?, ?, ?, ?, ?)");
             $hashed_password = password_hash($password, PASSWORD_BCRYPT); // Κρυπτογράφηση κωδικού
-            $stmt->bind_param("ssss", $name, $email, $hashed_password, $default_role);
+            $stmt->bind_param("sssss", $name, $email, $hashed_password, $default_role, $activation_token);
 
             if ($stmt->execute()) {
-                $_SESSION['message'] = "Επιτυχής εγγραφή!!!";
+                // Αποστολή email ενεργοποίησης
+                $activation_link = "http://localhost/yourwebsite/activate.php?token=$activation_token";
+
+                $mail = new PHPMailer(true);
+                try {
+                    // Ρυθμίσεις του SMTP
+                    $mail->isSMTP();
+                    $mail->Host = 'localhost';  // Ρυθμίστε τον διακομιστή SMTP του PaperCut
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'your-email@example.com'; // Ο χρήστης SMTP
+                    $mail->Password = 'your-smtp-password'; // Ο κωδικός SMTP
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 25;  // Θύρα του PaperCut (ή 587 για TLS)
+
+                    // Ρυθμίσεις του email
+                    $mail->setFrom('your-email@example.com', 'Your Name');
+                    $mail->addAddress($email, $name);
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Ενεργοποίηση Λογαριασμού';
+                    $mail->Body    = "<p>Παρακαλώ κάντε κλικ στο παρακάτω σύνδεσμο για να ενεργοποιήσετε το λογαριασμό σας:</p><p><a href='$activation_link'>$activation_link</a></p>";
+
+                    // Στέλνουμε το email
+                    $mail->send();
+                    $_SESSION['message'] = "Επιτυχής εγγραφή! Ένα email ενεργοποίησης στάλθηκε.";
+                } catch (Exception $e) {
+                    $_SESSION['message'] = "Το email ενεργοποίησης δεν μπόρεσε να αποσταλεί. Σφάλμα: {$mail->ErrorInfo}";
+                }
+
                 header('Location: ../login-register.php');
                 exit();
             } else {
@@ -64,8 +101,15 @@ if (isset($_POST['login_btn'])) {
     if ($result->num_rows > 0) {
         $userdata = $result->fetch_assoc();
 
-        // Έλεγχος αν το password είναι σωστό
+        // Έλεγχος αν το password είναι σωστό και ο λογαριασμός είναι ενεργοποιημένος
         if (password_verify($password, $userdata['user_password'])) {
+            // Έλεγχος αν ο λογαριασμός είναι ενεργοποιημένος
+            if ($userdata['user_status'] == 0) {
+                $_SESSION['message'] = "Ο λογαριασμός σας δεν έχει ενεργοποιηθεί ακόμα. Παρακαλώ ελέγξτε το email σας για τον σύνδεσμο ενεργοποίησης.";
+                header('Location: ../my-account');
+                exit();
+            }
+
             $_SESSION['auth'] = true;
 
             // Αποθήκευση δεδομένων του χρήστη στο session
