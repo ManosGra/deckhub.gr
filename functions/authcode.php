@@ -48,6 +48,7 @@ if (isset($_POST['register_btn'])) {
             if ($stmt->execute()) {
                 // Δημιουργία του σύνδεσμου ενεργοποίησης
                 $activation_link = "http://deckhub.local/activate.php?token=$activation_token";
+                //$activation_link = "http://deckhub.gr/activate.php?token=$activation_token";
 
                 // Εδώ ξεκινά ο κώδικας για την αποστολή του email ενεργοποίησης
                 $mail = new PHPMailer(true);
