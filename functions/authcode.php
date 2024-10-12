@@ -3,7 +3,7 @@ session_start();
 include '../config/db.php'; // Σύνδεση στη βάση δεδομένων
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require 'vendor/autoload.php'; 
+require '../vendor/autoload.php'; 
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
