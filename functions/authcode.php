@@ -4,11 +4,15 @@ include '../config/db.php'; // Σύνδεση στη βάση δεδομένων
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php'; 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
 
+// Συνάρτηση για την ανακατεύθυνση με μήνυμα
+function redirectWithMessage($message, $location = '../login-register.php') {
+    $_SESSION['message'] = $message;
+    header("Location: $location");
+    exit();
+}
 
+// Εγγραφή χρήστη
 if (isset($_POST['register_btn'])) {
     // Λήψη δεδομένων από τη φόρμα εγγραφής
     $name = $_POST['username'];
@@ -20,7 +24,7 @@ if (isset($_POST['register_btn'])) {
     $default_role = '0';
 
     // Δημιουργία του token για ενεργοποίηση
-    $activation_token = md5(rand());
+    $activation_token = md5(rand());  // Δημιουργία μοναδικού token
 
     // Έλεγχος αν το email υπάρχει ήδη στη βάση δεδομένων
     $stmt = $conn->prepare("SELECT user_email FROM user WHERE user_email = ?");
@@ -41,28 +45,26 @@ if (isset($_POST['register_btn'])) {
             $stmt->bind_param("sssss", $name, $email, $hashed_password, $default_role, $activation_token);
 
             if ($stmt->execute()) {
-                // Αποστολή email ενεργοποίησης
+                // Δημιουργία του σύνδεσμου ενεργοποίησης
                 $activation_link = "http://localhost/yourwebsite/activate.php?token=$activation_token";
 
+                // Εδώ ξεκινά ο κώδικας για την αποστολή του email ενεργοποίησης
                 $mail = new PHPMailer(true);
                 try {
                     // Ρυθμίσεις του SMTP
                     $mail->isSMTP();
-                    $mail->Host = 'localhost';  // Ρυθμίστε τον διακομιστή SMTP του PaperCut
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'your-email@example.com'; // Ο χρήστης SMTP
-                    $mail->Password = 'your-smtp-password'; // Ο κωδικός SMTP
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port = 25;  // Θύρα του PaperCut (ή 587 για TLS)
+                    $mail->Host = 'localhost';  // Ή 127.0.0.1 αν είναι έτσι τοποθετημένο το Papercut
+                    $mail->SMTPAuth = false;  // Χωρίς αυθεντικοποίηση
+                    $mail->Port = 25;  // Θύρα του Papercut (ή 587 αν χρησιμοποιείς TLS)
 
-                    // Ρυθμίσεις του email
-                    $mail->setFrom('your-email@example.com', 'Your Name');
-                    $mail->addAddress($email, $name);
+                    // Ρυθμίσεις email
+                    $mail->setFrom('your-email@example.com', 'Your Name'); // Το email μπορεί να είναι οποιοδήποτε για δοκιμές
+                    $mail->addAddress($email, $name); // Αποδέκτης
                     $mail->isHTML(true);
                     $mail->Subject = 'Ενεργοποίηση Λογαριασμού';
                     $mail->Body    = "<p>Παρακαλώ κάντε κλικ στο παρακάτω σύνδεσμο για να ενεργοποιήσετε το λογαριασμό σας:</p><p><a href='$activation_link'>$activation_link</a></p>";
 
-                    // Στέλνουμε το email
+                    // Στείλτε το email
                     $mail->send();
                     $_SESSION['message'] = "Επιτυχής εγγραφή! Ένα email ενεργοποίησης στάλθηκε.";
                 } catch (Exception $e) {
@@ -85,9 +87,8 @@ if (isset($_POST['register_btn'])) {
 
     $stmt->close();
 }
-
+// Σύνδεση χρήστη
 if (isset($_POST['login_btn'])) {
-    // Λήψη δεδομένων από τη φόρμα σύνδεσης
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -97,24 +98,19 @@ if (isset($_POST['login_btn'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Έλεγχος αν βρέθηκε ο χρήστης
     if ($result->num_rows > 0) {
         $userdata = $result->fetch_assoc();
 
-        // Έλεγχος αν το password είναι σωστό και ο λογαριασμός είναι ενεργοποιημένος
+        // Έλεγχος αν το password είναι σωστό
         if (password_verify($password, $userdata['user_password'])) {
             // Έλεγχος αν ο λογαριασμός είναι ενεργοποιημένος
             if ($userdata['user_status'] == 0) {
-                $_SESSION['message'] = "Ο λογαριασμός σας δεν έχει ενεργοποιηθεί ακόμα. Παρακαλώ ελέγξτε το email σας για τον σύνδεσμο ενεργοποίησης.";
-                header('Location: ../my-account');
-                exit();
+                redirectWithMessage("Ο λογαριασμός σας δεν έχει ενεργοποιηθεί ακόμα. Παρακαλώ ελέγξτε το email σας για τον σύνδεσμο ενεργοποίησης.");
             }
 
             $_SESSION['auth'] = true;
-
-            // Αποθήκευση δεδομένων του χρήστη στο session
             $_SESSION['auth_user'] = [
-                'user_id' => $userdata['user_id'],  // Χρήση του user_id από τη βάση
+                'user_id' => $userdata['user_id'],
                 'username' => $userdata['username'],
                 'email' => $userdata['user_email']
             ];
@@ -123,30 +119,18 @@ if (isset($_POST['login_btn'])) {
 
             // Έλεγχος ρόλου χρήστη
             if ($userdata['user_role'] == '1') {
-                $_SESSION['message'] = "Καλώς ήρθατε στον Πίνακα Ελέγχου";
-                header('Location: ../administration/index.php');
-                exit();
+                redirectWithMessage("Καλώς ήρθατε στον Πίνακα Ελέγχου", '../administration/index.php');
             } else {
-                $_SESSION['message'] = "Σύνδεση με επιτυχία";
-                header('Location: ../my-account');
-                exit();
+                redirectWithMessage("Σύνδεση με επιτυχία", '../my-account.php');
             }
         } else {
-            // Μη έγκυρος κωδικός πρόσβασης
-            $_SESSION['message'] = "Μη έγκυρες διαπιστεύσεις";
-            header('Location: ../my-account');
-            exit();
+            redirectWithMessage("Μη έγκυρες διαπιστεύσεις");
         }
     } else {
-        // Μη έγκυρο όνομα χρήστη
-        $_SESSION['message'] = "Μη έγκυρο όνομα χρήστη";
-        header('Location: ../my-account');
-        exit();
+        redirectWithMessage("Μη έγκυρο όνομα χρήστη");
     }
 
-    // Κλείσιμο του statement
     $stmt->close();
 }
-
 
 $conn->close();
