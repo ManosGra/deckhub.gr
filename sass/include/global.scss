@@ -259,37 +259,6 @@ img.fade-in {
     margin-bottom: 20px;
 }
 
-@media only screen and (max-width: 420px) {
-    .filters {
-        display: block;
-        margin: 50px auto;
-        max-width: 150px;
-    }
-}
-
-@media only screen and (max-width: 575px) {
-    .filters {
-        display: block;
-        margin: 50px auto;
-        max-width: 150px;
-    }
-}
-
-@media only screen and (min-width: 767px) {
-    .filters {
-        display: block;
-        margin: 50px auto;
-        max-width: 150px;
-
-    }
-}
-
-@media only screen and (min-width: 991px) {
-    .filters {
-        display: block;
-    }
-}
-
 
 .product-item {
     border: 1px solid #ddd;

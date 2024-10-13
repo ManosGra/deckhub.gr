@@ -106,7 +106,7 @@
           while ($item = mysqli_fetch_assoc($select_categories_query)) {
             ?>
             <li class="nav-item list-unstyled font-rubik fw-bold font-size-14">
-              <a class="nav-link" href="products?category=<?php echo htmlspecialchars($item['slug']); ?>">
+              <a class="nav-link mt-3" href="products?category=<?php echo htmlspecialchars($item['slug']); ?>">
                 <?php echo htmlspecialchars($item['category_name']); ?>
               </a>
             </li>
