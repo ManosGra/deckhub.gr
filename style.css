@@ -835,9 +835,6 @@ html {
   #products h6 {
     text-align: center;
   }
-  .filters {
-    flex-direction: row !important;
-  }
 }
 
 /*# sourceMappingURL=style.css.map */
