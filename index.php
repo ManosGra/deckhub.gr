@@ -14,4 +14,6 @@
 
 <?php include 'special-price.php' ?>
 
+<?php include 'logos.php' ?>
+
 <?php include 'includes/footer.php' ?>
